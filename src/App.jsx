@@ -28,6 +28,8 @@ import CompanyAnalytics from './pages/company/Analytics.jsx';
 import CompanyAudits from './pages/company/Audits.jsx';
 import CompanyAuditDetail from './pages/company/AuditDetail.jsx';
 import CompanyBranches from './pages/company/Branches.jsx';
+import CompanyBilling from './pages/company/Billing.jsx';
+import CompanyBillingDetail from './pages/company/BillingDetail.jsx';
 
 // Route path -> nav label, used to title the still-placeholder pages.
 // Full list mirrors the original pages/<role>/*.html sitemap.
@@ -42,8 +44,6 @@ const AUDITOR_PAGES = [
 ];
 
 const COMPANY_PAGES = [
-  ['billing-detail', 'Billing Detail'],
-  ['billing', 'Billing'],
   ['ingestion', 'Data Ingestion'],
   ['settings', 'Settings'],
 ];
@@ -104,6 +104,8 @@ export default function App() {
         <Route path="audits" element={<CompanyAudits />} />
         <Route path="audit-detail" element={<CompanyAuditDetail />} />
         <Route path="branches" element={<CompanyBranches />} />
+        <Route path="billing" element={<CompanyBilling />} />
+        <Route path="billing-detail" element={<CompanyBillingDetail />} />
         {placeholderRoutes('company', COMPANY_PAGES)}
       </Route>
 
