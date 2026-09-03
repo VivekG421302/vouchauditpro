@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-ink-950: #0A0E16;
+  --color-ink-900: #0F1420;
+  --color-ink-800: #161D2E;
+  --color-ink-700: #1E2740;
+
+  --color-brand-50: #EEF0FF;
+  --color-brand-100: #E0E3FF;
+  --color-brand-400: #8B8FF7;
+  --color-brand-500: #635BFF;
+  --color-brand-600: #4F46E5;
+  --color-brand-700: #4338CA;
+
+  --shadow-soft: 0 1px 2px rgba(15,20,32,0.04), 0 8px 24px -8px rgba(15,20,32,0.08);
+  --shadow-card: 0 1px 3px rgba(15,20,32,0.06), 0 1px 2px rgba(15,20,32,0.04);
+}
+
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.fade-in { animation: fadeIn .35s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.toast { animation: toastIn .35s cubic-bezier(.2,.7,.3,1) both; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* signature motif: geofence radar rings, used on login mark, sidebars, check-in modal */
+.radar-ring { position: absolute; inset: 0; border-radius: 9999px; border: 1px solid currentColor; opacity: 0; animation: radarPulse 2.6s cubic-bezier(.2,.6,.35,1) infinite; }
+.radar-ring.r2 { animation-delay: .65s; }
+.radar-ring.r3 { animation-delay: 1.3s; }
+@keyframes radarPulse {
+  0% { transform: scale(.35); opacity: .55; }
+  80% { opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.grain { background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0); background-size: 14px 14px; }
+
+.badge-chip { background: linear-gradient(180deg,#FFFFFF, #F8F9FF); }
+
+.modal-backdrop { backdrop-filter: blur(4px); }
+
+input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid #4F46E5; outline-offset: 1px; }
