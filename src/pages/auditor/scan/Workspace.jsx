@@ -7,6 +7,8 @@ import { useAuthStore } from '../../../store/useAuthStore.js';
 import ScanUpload from './Upload.jsx';
 import ScanAudit from './Audit.jsx';
 import ScanReco from './Reco.jsx';
+import ScanExecutive from './Executive.jsx';
+import { setScanContext } from '../../../lib/scanDb.js';
 
 // Tabs mirror the original standalone pages (index.html=audit,
 // executive.html, reco.html, upload.html). Lead sees all four; Executive
@@ -30,6 +32,7 @@ export default function ScanWorkspace() {
       setLoc(null);
       return;
     }
+    setScanContext(locationId);
     api.getLocation(locationId).then((l) => {
       const onTeam = l && [...(l.caAuditors || []), ...(l.assignedAuditors || [])].some((a) => a.id === auditorId);
       setLoc(onTeam ? l : null);
@@ -66,15 +69,7 @@ export default function ScanWorkspace() {
           <Icon name="arrow-left" className="w-3.5 h-3.5" />
           {loc.name}
         </Link>
-        <div className="bg-white border border-dashed border-slate-300 rounded-2xl p-10 text-center">
-          <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-3">
-            <Icon name="scan-barcode" className="w-6 h-6 text-slate-400" />
-          </div>
-          <p className="text-sm font-semibold text-ink-950">Executive scanning view</p>
-          <p className="text-xs text-slate-500 mt-1">
-            The streamlined bin-by-bin scanning flow for Audit Executives hasn't been ported to React yet — coming in a later session.
-          </p>
-        </div>
+        <ScanExecutive auditorName={session?.name} />
       </AppShell>
     );
   }
