@@ -6,6 +6,7 @@ import { useVouchStore } from '../../../store/useVouchStore.js';
 import { useAuthStore } from '../../../store/useAuthStore.js';
 import ScanUpload from './Upload.jsx';
 import ScanAudit from './Audit.jsx';
+import ScanReco from './Reco.jsx';
 
 // Tabs mirror the original standalone pages (index.html=audit,
 // executive.html, reco.html, upload.html). Lead sees all four; Executive
@@ -110,8 +111,9 @@ export default function ScanWorkspace() {
 
       {tab === 'upload' && <ScanUpload locationId={loc.id} />}
       {tab === 'audit' && <ScanAudit auditorName={session?.name} />}
+      {tab === 'reco' && <ScanReco />}
 
-      {tab !== 'upload' && tab !== 'audit' && (
+      {tab !== 'upload' && tab !== 'audit' && tab !== 'reco' && (
         <div className="bg-white border border-dashed border-slate-300 rounded-2xl p-10 text-center">
           <p className="text-sm font-semibold text-ink-950 capitalize">{tab}</p>
           <p className="text-xs text-slate-500 mt-1">This tab hasn't been ported to React yet — coming in a later session.</p>
