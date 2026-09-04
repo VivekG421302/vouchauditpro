@@ -53,3 +53,89 @@ body { -webkit-font-smoothing: antialiased; }
 .modal-backdrop { backdrop-filter: blur(4px); }
 
 input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid #4F46E5; outline-offset: 1px; }
+
+/* ============================================================
+   Theme overrides — ported verbatim from assets/css/main.css.
+   Keyed off [data-vouch-theme] on <html>, applied by ThemePicker
+   on change and re-applied on boot by main.jsx from the persisted
+   VouchDB setting (settings.theme).
+============================================================ */
+html[data-vouch-theme="dark"] body { background: #0A0E16 !important; color: #E2E8F0; }
+html[data-vouch-theme="dark"] .text-slate-900 { color: #E2E8F0 !important; }
+html[data-vouch-theme="dark"] .text-slate-700,
+html[data-vouch-theme="dark"] .text-slate-600 { color: #94A3B8 !important; }
+html[data-vouch-theme="dark"] .text-slate-500 { color: #8291A8 !important; }
+html[data-vouch-theme="dark"] .text-slate-400 { color: #64748B !important; }
+html[data-vouch-theme="dark"] .bg-slate-50 { background: #0F1420 !important; }
+html[data-vouch-theme="dark"] .bg-white { background: #12172A !important; }
+html[data-vouch-theme="dark"] .bg-white\/90 { background: rgba(18,23,42,.9) !important; }
+html[data-vouch-theme="dark"] .bg-slate-100 { background: #1E2740 !important; }
+html[data-vouch-theme="dark"] .bg-ink-950 { background: #171F33 !important; }
+html[data-vouch-theme="dark"] .border-slate-200,
+html[data-vouch-theme="dark"] .border-slate-100 { border-color: #232B42 !important; }
+html[data-vouch-theme="dark"] .border-slate-300 { border-color: #334059 !important; }
+html[data-vouch-theme="dark"] .text-ink-950 { color: #F1F5F9 !important; }
+html[data-vouch-theme="dark"] .divide-slate-100 > * { border-color: #232B42 !important; }
+html[data-vouch-theme="dark"] input,
+html[data-vouch-theme="dark"] select,
+html[data-vouch-theme="dark"] textarea { background: #161D2E !important; color: #E2E8F0; border-color: #232B42 !important; }
+html[data-vouch-theme="dark"] .shadow-card { box-shadow: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3); }
+html[data-vouch-theme="dark"] .hover\:bg-slate-50:hover,
+html[data-vouch-theme="dark"] .hover\:bg-slate-100:hover { background: #1E2740 !important; }
+html[data-vouch-theme="dark"] .bg-brand-50 { background: rgba(99,91,255,.18) !important; }
+html[data-vouch-theme="dark"] .bg-brand-100 { background: rgba(99,91,255,.24) !important; }
+html[data-vouch-theme="dark"] .bg-emerald-50 { background: rgba(16,185,129,.14) !important; }
+html[data-vouch-theme="dark"] .bg-amber-50 { background: rgba(245,158,11,.14) !important; }
+html[data-vouch-theme="dark"] .bg-red-50 { background: rgba(239,68,68,.14) !important; }
+html[data-vouch-theme="dark"] .bg-slate-200 { background: #293349 !important; }
+html[data-vouch-theme="dark"] .text-emerald-700 { color: #34D399 !important; }
+html[data-vouch-theme="dark"] .text-amber-700 { color: #FBBF24 !important; }
+html[data-vouch-theme="dark"] .text-brand-700 { color: #A5A9FA !important; }
+html[data-vouch-theme="dark"] .border-emerald-100,
+html[data-vouch-theme="dark"] .border-emerald-200 { border-color: rgba(16,185,129,.35) !important; }
+html[data-vouch-theme="dark"] .border-amber-100,
+html[data-vouch-theme="dark"] .border-amber-200 { border-color: rgba(245,158,11,.35) !important; }
+html[data-vouch-theme="dark"] .border-red-100,
+html[data-vouch-theme="dark"] .border-red-200 { border-color: rgba(239,68,68,.35) !important; }
+html[data-vouch-theme="dark"] .border-brand-100 { border-color: rgba(99,91,255,.35) !important; }
+html[data-vouch-theme="dark"] .vouch-panel.open { border-left-color: #232B42; }
+
+html[data-vouch-theme="indigo"] body { background: #0B0A1F !important; color: #E4E2FF; }
+html[data-vouch-theme="indigo"] .text-slate-900 { color: #E4E2FF !important; }
+html[data-vouch-theme="indigo"] .text-slate-700,
+html[data-vouch-theme="indigo"] .text-slate-600 { color: #A8A3E0 !important; }
+html[data-vouch-theme="indigo"] .text-slate-500 { color: #9089CC !important; }
+html[data-vouch-theme="indigo"] .text-slate-400 { color: #7A74B8 !important; }
+html[data-vouch-theme="indigo"] .bg-slate-50 { background: #120F2E !important; }
+html[data-vouch-theme="indigo"] .bg-white { background: #171335 !important; }
+html[data-vouch-theme="indigo"] .bg-white\/90 { background: rgba(23,19,53,.9) !important; }
+html[data-vouch-theme="indigo"] .bg-slate-100 { background: #221D4A !important; }
+html[data-vouch-theme="indigo"] .bg-ink-950 { background: #1D1846 !important; }
+html[data-vouch-theme="indigo"] .border-slate-200,
+html[data-vouch-theme="indigo"] .border-slate-100 { border-color: #312A5E !important; }
+html[data-vouch-theme="indigo"] .border-slate-300 { border-color: #413875 !important; }
+html[data-vouch-theme="indigo"] .text-ink-950 { color: #F1F0FF !important; }
+html[data-vouch-theme="indigo"] .divide-slate-100 > * { border-color: #312A5E !important; }
+html[data-vouch-theme="indigo"] input,
+html[data-vouch-theme="indigo"] select,
+html[data-vouch-theme="indigo"] textarea { background: #1D1846 !important; color: #E4E2FF; border-color: #312A5E !important; }
+html[data-vouch-theme="indigo"] .shadow-card { box-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 24px -8px rgba(99,91,255,.35); }
+html[data-vouch-theme="indigo"] .hover\:bg-slate-50:hover,
+html[data-vouch-theme="indigo"] .hover\:bg-slate-100:hover { background: #221D4A !important; }
+html[data-vouch-theme="indigo"] .bg-brand-50 { background: rgba(139,143,247,.2) !important; }
+html[data-vouch-theme="indigo"] .bg-brand-100 { background: rgba(139,143,247,.28) !important; }
+html[data-vouch-theme="indigo"] .bg-emerald-50 { background: rgba(16,185,129,.16) !important; }
+html[data-vouch-theme="indigo"] .bg-amber-50 { background: rgba(245,158,11,.16) !important; }
+html[data-vouch-theme="indigo"] .bg-red-50 { background: rgba(239,68,68,.16) !important; }
+html[data-vouch-theme="indigo"] .bg-slate-200 { background: #33295E !important; }
+html[data-vouch-theme="indigo"] .text-emerald-700 { color: #34D399 !important; }
+html[data-vouch-theme="indigo"] .text-amber-700 { color: #FBBF24 !important; }
+html[data-vouch-theme="indigo"] .text-brand-700 { color: #C2C4FA !important; }
+html[data-vouch-theme="indigo"] .border-emerald-100,
+html[data-vouch-theme="indigo"] .border-emerald-200 { border-color: rgba(16,185,129,.35) !important; }
+html[data-vouch-theme="indigo"] .border-amber-100,
+html[data-vouch-theme="indigo"] .border-amber-200 { border-color: rgba(245,158,11,.35) !important; }
+html[data-vouch-theme="indigo"] .border-red-100,
+html[data-vouch-theme="indigo"] .border-red-200 { border-color: rgba(239,68,68,.35) !important; }
+html[data-vouch-theme="indigo"] .border-brand-100 { border-color: rgba(139,143,247,.35) !important; }
+html[data-vouch-theme="indigo"] .vouch-panel.open { border-left-color: #312A5E; }

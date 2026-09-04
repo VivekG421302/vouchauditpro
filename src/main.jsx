@@ -14,6 +14,16 @@ function Root() {
     hydrate();
   }, [hydrate]);
 
+  useEffect(() => {
+    if (!ready) return;
+    useVouchStore
+      .getState()
+      .api.getSettings()
+      .then((settings) => {
+        document.documentElement.setAttribute('data-vouch-theme', settings?.theme || 'light');
+      });
+  }, [ready]);
+
   if (!ready) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">

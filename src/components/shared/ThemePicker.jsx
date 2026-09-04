@@ -2,10 +2,6 @@ import { Icon } from '../ui/Icon.jsx';
 import { useVouchStore } from '../../store/useVouchStore.js';
 import { toast } from '../../store/useToastStore.js';
 
-// NOTE: theme swatches are ported as-is, but the dark/indigo CSS variable
-// sets themselves haven't been ported to the Tailwind v4 tokens yet — this
-// picker calls the API and sets the attribute correctly, it just won't
-// repaint the app until that CSS pass happens in a later session.
 const THEMES = [
   { id: 'light', label: 'Light', desc: 'Default — clean & minimal', swatch: ['#FFFFFF', '#F8FAFC', '#635BFF'] },
   { id: 'dark', label: 'Dark', desc: 'Low-glare, for long shifts', swatch: ['#0A0E16', '#12172A', '#635BFF'] },
