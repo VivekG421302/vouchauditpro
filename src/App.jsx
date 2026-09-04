@@ -36,6 +36,9 @@ import AdminDashboard from './pages/admin/Dashboard.jsx';
 import AdminApprovals from './pages/admin/Approvals.jsx';
 import AdminCompanies from './pages/admin/Companies.jsx';
 import AdminEscalations from './pages/admin/Escalations.jsx';
+import AdminInvoices from './pages/admin/Invoices.jsx';
+import AdminUsers from './pages/admin/Users.jsx';
+import AdminSettings from './pages/admin/Settings.jsx';
 
 // Route path -> nav label, used to title the still-placeholder pages.
 // Full list mirrors the original pages/<role>/*.html sitemap.
@@ -51,11 +54,7 @@ const AUDITOR_PAGES = [
 
 const COMPANY_PAGES = [];
 
-const ADMIN_PAGES = [
-  ['invoices', 'Invoices & Payouts'],
-  ['settings', 'Settings'],
-  ['users', 'User Management'],
-];
+const ADMIN_PAGES = [];
 
 function placeholderRoutes(role, pages) {
   return pages.map(([path, title]) => (
@@ -115,6 +114,9 @@ export default function App() {
         <Route path="approvals" element={<AdminApprovals />} />
         <Route path="companies" element={<AdminCompanies />} />
         <Route path="escalations" element={<AdminEscalations />} />
+        <Route path="invoices" element={<AdminInvoices />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="settings" element={<AdminSettings />} />
         {placeholderRoutes('admin', ADMIN_PAGES)}
       </Route>
 
