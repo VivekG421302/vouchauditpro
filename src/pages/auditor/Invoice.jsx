@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import AppShell from '../../components/layout/AppShell.jsx';
 import { Icon } from '../../components/ui/Icon.jsx';
 import { useVouchStore } from '../../store/useVouchStore.js';
 import { useAuthStore } from '../../store/useAuthStore.js';
 import { vouchFormatDate } from '../../lib/db.js';
 import { formatMoney } from '../../lib/format.js';
 
+// Standalone page — deliberately NOT wrapped in AppShell. An invoice is a
+// printable document: no sidebar/topbar/bottom-nav should ever end up on
+// the printed page, and it must render the same regardless of the
+// person's chosen in-app theme (dark/indigo would waste ink and look
+// unprofessional) — see CLAUDE.md §21b / the original invoice.html.
 export default function AuditorInvoice() {
   const api = useVouchStore((s) => s.api);
   const session = useAuthStore((s) => s.session);
@@ -21,36 +25,58 @@ export default function AuditorInvoice() {
     api.getInvoiceDetail(locationId, auditorId).then((data) => setInv(data || null));
   }, [api, auditorId, locationId]);
 
+  // Force light appearance regardless of the person's chosen theme while
+  // this page is mounted, restoring it on the way out.
+  useEffect(() => {
+    const prev = document.documentElement.getAttribute('data-vouch-theme');
+    document.documentElement.setAttribute('data-vouch-theme', 'light');
+    return () => {
+      if (prev) document.documentElement.setAttribute('data-vouch-theme', prev);
+      else document.documentElement.removeAttribute('data-vouch-theme');
+    };
+  }, []);
+
   return (
-    <AppShell role="auditor" title="Invoice">
-      <div className="mb-4 flex items-center justify-between print:hidden">
+    <div className="min-h-screen bg-slate-100 font-body text-slate-900 antialiased">
+      <style>{`
+        .invoice-sheet { width: 210mm; min-height: 297mm; margin: 0 auto; }
+        @media print {
+          @page { size: A4; margin: 14mm; }
+          body { background: #fff !important; }
+          .no-print { display: none !important; }
+          .invoice-sheet { width: auto; min-height: 0; margin: 0; box-shadow: none !important; border: none !important; }
+        }
+      `}</style>
+
+      <div className="no-print sticky top-0 z-10 bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex items-center justify-between">
         <Link to="/auditor/receipts" className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-ink-950">
           <Icon name="arrow-left" className="w-3.5 h-3.5" />
-          Receipts
+          Back to Receipts
         </Link>
         {inv && (
           <button
             onClick={() => window.print()}
-            className="inline-flex items-center gap-1.5 bg-ink-950 text-white text-xs font-medium px-3.5 py-2 rounded-lg hover:bg-ink-900"
+            className="inline-flex items-center gap-1.5 bg-ink-950 text-white text-xs font-medium px-4 py-2 rounded-lg hover:bg-ink-900"
           >
             <Icon name="printer" className="w-3.5 h-3.5" />
-            Print / Save PDF
+            Print / Save as PDF
           </button>
         )}
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-card p-6 sm:p-10 max-w-3xl mx-auto">
-        {inv === undefined && <p className="text-sm text-slate-400 py-24 text-center">Loading…</p>}
-        {inv === null && (
-          <p className="text-sm text-slate-400 py-24 text-center">
-            Invoice not found.{' '}
-            <Link to="/auditor/receipts" className="text-brand-600 font-medium">
-              Back to Receipts
-            </Link>
-          </p>
-        )}
-        {inv && (
-          <>
+      <div className="py-6 px-3 sm:px-6">
+        <div className="invoice-sheet bg-white shadow-card border border-slate-200 rounded-lg sm:rounded-none p-8 sm:p-12 text-[13px] text-slate-700">
+          {inv === undefined && <p className="text-sm text-slate-400 py-24 text-center">Loading…</p>}
+          {inv === null && (
+            <p className="text-sm text-slate-400 py-24 text-center">
+              Invoice not found.{' '}
+              <Link to="/auditor/receipts" className="text-brand-600 font-medium">
+                Back to Receipts
+              </Link>
+            </p>
+          )}
+          {inv && (
+            <>
             <div className="flex items-start justify-between border-b-2 border-ink-950 pb-6 mb-6">
               <div>
                 <div className="flex items-center gap-2">
@@ -219,9 +245,10 @@ export default function AuditorInvoice() {
               </p>
               <p className="font-display font-semibold text-ink-950 text-sm mt-5">Thank you for your work on this audit.</p>
             </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
-    </AppShell>
+    </div>
   );
 }
