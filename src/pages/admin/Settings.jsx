@@ -5,12 +5,15 @@ import ThemePicker from '../../components/shared/ThemePicker.jsx';
 import { Icon } from '../../components/ui/Icon.jsx';
 import { useVouchStore } from '../../store/useVouchStore.js';
 import { useAuthStore } from '../../store/useAuthStore.js';
+import { usePwaInstall } from '../../lib/usePwaInstall.js';
+import { toast } from '../../store/useToastStore.js';
 
 export default function AdminSettings() {
   const api = useVouchStore((s) => s.api);
   const session = useAuthStore((s) => s.session);
   const logout = useAuthStore((s) => s.logout);
   const navigate = useNavigate();
+  const { canInstall, installed, promptInstall } = usePwaInstall();
 
   const [theme, setThemeState] = useState('light');
   const [rbac, setRbac] = useState(null);
@@ -97,12 +100,32 @@ export default function AdminSettings() {
           <div className="bg-white border border-slate-200 rounded-2xl shadow-card p-5">
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-display font-semibold text-ink-950">Install as App</h3>
-              <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">Not yet configured</span>
+              <span
+                className={`text-[11px] font-medium px-2.5 py-1 rounded-full ${
+                  installed ? 'bg-emerald-50 text-emerald-700' : canInstall ? 'bg-brand-50 text-brand-700' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {installed ? 'Installed' : canInstall ? 'Available' : 'Not available on this browser'}
+              </span>
             </div>
-            <p className="text-xs text-slate-500">
-              PWA installability (service worker, manifest, install prompt) hasn't been wired up in the React build yet — it's on the roadmap
-              alongside the Vercel deployment work.
+            <p className="text-xs text-slate-500 mb-3">
+              Install Vouch as a standalone app for faster access and offline support for previously visited pages.
             </p>
+            {!installed && (
+              <button
+                disabled={!canInstall}
+                onClick={() =>
+                  promptInstall().then((outcome) => {
+                    if (outcome === 'accepted') toast('Vouch installed', 'check-circle-2', 'emerald');
+                    else if (outcome === 'dismissed') toast('Install dismissed', 'x', 'ink');
+                  })
+                }
+                className="inline-flex items-center gap-1.5 bg-ink-950 text-white text-xs font-medium px-3.5 py-2 rounded-lg hover:bg-ink-900 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Icon name="download" className="w-3.5 h-3.5" />
+                Install
+              </button>
+            )}
           </div>
         </div>
       </div>
