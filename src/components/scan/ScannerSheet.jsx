@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as ZXing from '@zxing/library';
-import { Icon } from './Icon.jsx';
+import { Icon } from '../ui/Icon.jsx';
 
 // open={true}/onClose/onDetect(code) — mirrors Scanner.open()'s single-shot
 // behavior: fires onDetect once then the caller closes it.
