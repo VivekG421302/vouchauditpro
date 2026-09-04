@@ -358,13 +358,13 @@ export default function AuditorAudit() {
                   ? 'As Lead, you can upload the inventory sheet, work the full scanning workspace, and resolve reconciliation.'
                   : 'As Executive, you scan items bin by bin in a streamlined mobile flow — your Lead handles uploads and reconciliation.'}
               </p>
-              <button
-                onClick={() => toast("The Audit Scanning workspace (merged sub-PWA) hasn't been ported to React yet", 'construction', 'amber')}
+              <Link
+                to={`/auditor/scan?locationId=${loc.id}`}
                 className="w-full bg-ink-950 text-white text-sm font-medium py-2.5 rounded-lg hover:bg-ink-900 inline-flex items-center justify-center gap-1.5"
               >
                 <Icon name="scan-barcode" className="w-4 h-4" />
                 {scanSummary.started ? 'Open Audit Scanning' : 'Start Audit Scanning'}
-              </button>
+              </Link>
             </>
           )}
         </div>

@@ -39,18 +39,13 @@ import AdminEscalations from './pages/admin/Escalations.jsx';
 import AdminInvoices from './pages/admin/Invoices.jsx';
 import AdminUsers from './pages/admin/Users.jsx';
 import AdminSettings from './pages/admin/Settings.jsx';
+import ScanWorkspace from './pages/auditor/scan/Workspace.jsx';
 
 // Route path -> nav label, used to title the still-placeholder pages.
 // Full list mirrors the original pages/<role>/*.html sitemap.
 const CA_PAGES = [];
 
-const AUDITOR_PAGES = [
-  ['scan', 'Scan'],
-  ['scan/audit', 'Scan Audit'],
-  ['scan/executive', 'Scan Executive'],
-  ['scan/reco', 'Scan Reconciliation'],
-  ['scan/upload', 'Scan Upload'],
-];
+const AUDITOR_PAGES = [];
 
 const COMPANY_PAGES = [];
 
@@ -94,6 +89,7 @@ export default function App() {
         <Route path="invoice" element={<AuditorInvoice />} />
         <Route path="geo-selfie" element={<AuditorGeoSelfie />} />
         <Route path="audit" element={<AuditorAudit />} />
+        <Route path="scan" element={<ScanWorkspace />} />
         {placeholderRoutes('auditor', AUDITOR_PAGES)}
       </Route>
 
