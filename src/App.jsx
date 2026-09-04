@@ -32,6 +32,8 @@ import CompanyBilling from './pages/company/Billing.jsx';
 import CompanyBillingDetail from './pages/company/BillingDetail.jsx';
 import CompanyIngestion from './pages/company/Ingestion.jsx';
 import CompanySettings from './pages/company/Settings.jsx';
+import AdminDashboard from './pages/admin/Dashboard.jsx';
+import AdminApprovals from './pages/admin/Approvals.jsx';
 
 // Route path -> nav label, used to title the still-placeholder pages.
 // Full list mirrors the original pages/<role>/*.html sitemap.
@@ -48,9 +50,7 @@ const AUDITOR_PAGES = [
 const COMPANY_PAGES = [];
 
 const ADMIN_PAGES = [
-  ['approvals', 'Project Approvals'],
   ['companies', 'Companies'],
-  ['dashboard', 'Control Center'],
   ['escalations', 'Escalations'],
   ['invoices', 'Invoices & Payouts'],
   ['settings', 'Settings'],
@@ -111,6 +111,8 @@ export default function App() {
       </Route>
 
       <Route path="/admin" element={<ProtectedRoute role="admin" />}>
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="approvals" element={<AdminApprovals />} />
         {placeholderRoutes('admin', ADMIN_PAGES)}
       </Route>
 
