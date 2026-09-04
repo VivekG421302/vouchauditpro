@@ -14,7 +14,7 @@ function wrapApi(refresh) {
     const fn = VouchAPI[key];
     if (typeof fn !== 'function') continue;
     wrapped[key] = (...args) =>
-      Promise.resolve(fn(...args)).then((result) => {
+      Promise.resolve(fn.apply(VouchAPI, args)).then((result) => {
         refresh();
         return result;
       });
