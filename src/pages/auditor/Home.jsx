@@ -8,6 +8,7 @@ import { useAuthStore } from '../../store/useAuthStore.js';
 import { vouchDaysUntil, vouchFormatDate } from '../../lib/db.js';
 
 function parseVouchDate(str) {
+  if (!str || typeof str !== 'string') return null;
   const parts = str.split(' ');
   if (parts.length !== 3) return null;
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
